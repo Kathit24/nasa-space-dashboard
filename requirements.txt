@@ -1,0 +1,7 @@
+streamlit==1.40.1
+requests
+matplotlib
+
+requests
+streamlit
+matplotlib
