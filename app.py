@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt  # For charts
 from datetime import datetime, timedelta  # For date handling
 
 # Replace 'YOUR_API_KEY' with your real NASA API key from Step 1
-API_KEY = 'YOUR_API_KEY'  # IMPORTANT: Use your key here!
+API_KEY = API_KEY = st.secrets["ylRcTmImqmCpfnHf3tsRNPJjhtyzEOkkOLib4FlD"]  # IMPORTANT: Use your key here!
 
 
 # Function to fetch Astronomy Picture of the Day (APOD)
