@@ -60,21 +60,22 @@ if asteroids:
     st.table([{"Name": name, "Max Size (m)": round(size, 2), "Miss Distance (km)": round(distance, 2)} for
               name, size, distance in asteroids])
 
-    # Simple bar chart: Size vs Distance
+    # Simplified bar chart: Size vs Distance (single axis, color-coded)
     st.subheader("Asteroid Size vs. Miss Distance")
     names = [name for name, _, _ in asteroids]
     sizes = [size for _, size, _ in asteroids]
     distances = [distance for _, _, distance in asteroids]
 
-    fig, ax = plt.subplots()
-    ax.bar(names, sizes, color='skyblue', label='Size (m)')
+    fig, ax = plt.subplots(figsize=(10, 6))  # Larger figure for better display
+    bars = ax.bar(names, sizes, color='skyblue', alpha=0.7, label='Size (m)')
     ax.set_ylabel('Size (meters)', color='skyblue')
-    ax.tick_params(axis='y', labelcolor='skyblue')
+    ax.set_xlabel('Asteroid Name')
+    ax.set_title('Asteroid Sizes and Miss Distances')
 
-    ax2 = ax.twinx()
-    ax2.plot(names, distances, color='red', marker='o', label='Distance (km)')
-    ax2.set_ylabel('Miss Distance (km)', color='red')
-    ax2.tick_params(axis='y', labelcolor='red')
+    # Add distance as text labels on bars for clarity
+    for bar, dist in zip(bars, distances):
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.1, f'Dist: {round(dist, 2)} km', ha='center',
+                va='bottom', fontsize=8, color='red')
 
     plt.xticks(rotation=45, ha='right')
     st.pyplot(fig)
