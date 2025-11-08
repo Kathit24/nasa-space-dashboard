@@ -45,11 +45,14 @@ st.markdown("Built with Python | Fetches real-time data from NASA APIs")
 # Section 1: Astronomy Picture of the Day
 st.header("🌌 Astronomy Picture of the Day")
 apod_title, apod_explanation, apod_url = get_apod()
-if apod_url:
+if apod_url and apod_url.startswith('http'):  # Ensure it's a valid image URL
     st.image(apod_url, caption=apod_title, use_column_width=True)
     st.write(apod_explanation)
+elif apod_url:  # If it's not an image (e.g., video), show a message
+    st.warning(f"Today's APOD is not an image: {apod_title}. Check NASA's site for details.")
+    st.write(apod_explanation)
 else:
-    st.error(apod_title + ": " + apod_explanation)
+    st.error("Could not fetch APOD data. Check your API key or try again later.")
 
 # Section 2: Near-Earth Objects Tracker
 st.header("🛰️ Near-Earth Asteroids (Next 7 Days)")
